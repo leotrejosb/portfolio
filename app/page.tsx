@@ -84,7 +84,7 @@ export default function Home() {
                 '[Starting secure connection...]',
                 '[Authentication successful.]',
                 '',
-                "Hey, I&apos;m Leonardo Trejos. Welcome to my corner of the web."
+                "Hey, I am Leonardo Trejos. Welcome to my corner of the web."
               ]}
             />
 
