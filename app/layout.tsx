@@ -9,12 +9,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Tu Nombre | Full-Stack Developer & Cybersecurity Analyst',
+  title: 'Leonardo Trejos | Full-Stack Developer & Cybersecurity Analyst',
   description: 'Especializado en desarrollo full-stack, ciberseguridad y arquitectura AWS. Construyendo soluciones seguras, escalables y de alto rendimiento.',
   keywords: ['Full-Stack Developer', 'Cybersecurity', 'AWS', 'Django', 'Next.js', 'React', 'Security'],
-  authors: [{ name: 'Tu Nombre' }],
+  authors: [{ name: 'Leonardo Trejos' }],
   openGraph: {
-    title: 'Tu Nombre | Full-Stack Developer & Cybersecurity Analyst',
+    title: 'Leonardo Trejos | Full-Stack Developer & Cybersecurity Analyst',
     description: 'Especializado en desarrollo full-stack, ciberseguridad y arquitectura AWS.',
     type: 'website',
   },
