@@ -84,7 +84,7 @@ export default function Home() {
                 '[Starting secure connection...]',
                 '[Authentication successful.]',
                 '',
-                "Hey, I'm Leonardo Trejos. Welcome to my corner of the web."
+                "Hey, I&apos;m Leonardo Trejos. Welcome to my corner of the web."
               ]}
             />
 
@@ -221,13 +221,12 @@ export default function Home() {
             className="glassmorphism rounded-xl p-12 text-center space-y-6 border-2 border-primary/20"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-              <span className="text-destructive">Ready</span>{' '}
-               to build something{' '}
+              <span className="text-destructive">Ready</span> to build something{' '}
               <span className="text-primary">secure</span> and{' '}
               <span className="text-secondary">scalable</span>?
             </h2>
             <p className="text-xl text-muted-foreground">
-              Let's work together to bring your next project to life.
+              Let&apos;s work together to bring your next project to life.
             </p>
             <Link href="/contact">
               <Button
