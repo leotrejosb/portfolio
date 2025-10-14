@@ -112,13 +112,15 @@ export default function ContactPage() {
                 </span>
               </h1>
               <p className="text-xl text-gray-400">
-                Have a project in mind? Let's talk about how I can help bring it to life.
+                {/* CORRECTED LINE 1 */}
+                Have a project in mind? Let&apos;s talk about how I can help bring it to life.
               </p>
             </div>
 
             <div className="glassmorphism rounded-xl p-8 space-y-6">
               <h2 className="text-2xl font-bold text-white mb-6">
-                Let's Connect
+                {/* CORRECTED LINE 2 */}
+                Let&apos;s Connect
               </h2>
 
               <div className="space-y-4">
