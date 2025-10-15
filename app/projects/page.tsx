@@ -82,7 +82,7 @@ export default function ProjectsPage() {
                 size="lg"
                 className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-black font-bold transition-all duration-300 hover:shadow-2xl hover:shadow-green-400/50"
               >
-                Let's Talk
+                Let&apos;s Talk
               </Button>
             </Link>
           </div>

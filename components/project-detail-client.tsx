@@ -160,7 +160,7 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
               Interested in a similar project?
             </h2>
             <p className="text-xl text-gray-300">
-              Let's talk about how I can help build your next solution.
+              Let&apos;s talk about how I can help build your next solution.
             </p>
             <Link href="/contact">
               <Button
