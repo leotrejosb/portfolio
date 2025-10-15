@@ -27,7 +27,7 @@ async function getProject(slug: string): Promise<Project | null> {
   return res.json();
 }
 
-// ✅ The Page Component with the corrected props type
+// The Page Component with the correct props type
 export default async function ProjectDetailPage({ params }: { params: { slug: string } }) {
   const project = await getProject(params.slug);
 
