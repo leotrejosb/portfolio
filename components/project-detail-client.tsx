@@ -24,13 +24,13 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Link href="/proyectos">
+          <Link href="/projects">
             <Button
               variant="ghost"
               className="text-gray-400 hover:text-green-400 transition-colors mb-8"
             >
               <ArrowLeft className="mr-2 h-5 w-5" />
-              Volver a proyectos
+              Back to Projects
             </Button>
           </Link>
         </motion.div>
@@ -69,7 +69,7 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
               >
                 <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="mr-2 h-5 w-5" />
-                  Ver Demo
+                  View Demo
                 </a>
               </Button>
             )}
@@ -82,7 +82,7 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
               >
                 <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                   <Github className="mr-2 h-5 w-5" />
-                  Ver Código
+                  View Code
                 </a>
               </Button>
             )}
@@ -92,7 +92,7 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
             <div>
               <h2 className="text-2xl font-bold text-green-400 mb-4 flex items-center">
                 <Code2 className="mr-3 h-6 w-6" />
-                Descripción del Proyecto
+                Project Overview
               </h2>
               <p className="text-gray-300 text-lg leading-relaxed">
                 {project.fullDescription}
@@ -101,21 +101,21 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
 
             <div className="grid md:grid-cols-3 gap-6 pt-6">
               <div className="space-y-3">
-                <h3 className="text-xl font-bold text-white">El Desafío</h3>
+                <h3 className="text-xl font-bold text-white">The Challenge</h3>
                 <p className="text-gray-400 leading-relaxed">
                   {project.challenge}
                 </p>
               </div>
 
               <div className="space-y-3">
-                <h3 className="text-xl font-bold text-white">La Solución</h3>
+                <h3 className="text-xl font-bold text-white">The Solution</h3>
                 <p className="text-gray-400 leading-relaxed">
                   {project.solution}
                 </p>
               </div>
 
               <div className="space-y-3">
-                <h3 className="text-xl font-bold text-white">Resultados</h3>
+                <h3 className="text-xl font-bold text-white">Results</h3>
                 <ul className="space-y-2">
                   {project.results.map((result, index) => (
                     <li key={index} className="flex items-start gap-2 text-gray-400">
@@ -130,11 +130,11 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
 
           <div className="glassmorphism rounded-xl p-8">
             <h2 className="text-2xl font-bold text-blue-500 mb-6">
-              Arquitectura y Tecnologías
+              Architecture & Tech Stack
             </h2>
             <div className="space-y-4">
               <p className="text-gray-300">
-                Este proyecto fue construido utilizando un stack tecnológico moderno y robusto:
+                This project was built using a modern and robust tech stack:
               </p>
               <div className="flex flex-wrap gap-3">
                 {project.technologies.map((tech) => (
@@ -157,17 +157,17 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
             className="glassmorphism rounded-xl p-12 text-center space-y-6 border-2 border-green-400/20"
           >
             <h2 className="text-3xl font-bold text-white">
-              ¿Te interesa un proyecto similar?
+              Interested in a similar project?
             </h2>
             <p className="text-xl text-gray-300">
-              Hablemos sobre cómo puedo ayudarte a construir tu próxima solución
+              Let's talk about how I can help build your next solution.
             </p>
-            <Link href="/contacto">
+            <Link href="/contact">
               <Button
                 size="lg"
                 className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-black font-bold text-lg px-8 py-6 transition-all duration-300"
               >
-                Contáctame
+                Contact Me
               </Button>
             </Link>
           </motion.div>

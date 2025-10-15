@@ -59,12 +59,12 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         </div>
 
         <div className="flex gap-3 pt-4">
-          <Link href={`/proyectos/${project.slug}`} className="flex-1">
+          <Link href={`/projects/${project.slug}`} className="flex-1">
             <Button
               variant="outline"
               className="w-full border-green-400 text-green-400 hover:bg-green-400/10 transition-all duration-300"
             >
-              Ver Detalles
+              View Details
             </Button>
           </Link>
 
