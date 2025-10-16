@@ -4,43 +4,45 @@ import { ProjectDetailClient } from '@/components/project-detail-client';
 import { Project } from '@/lib/projects-data'; 
 import { notFound } from 'next/navigation';
 
-// Define un tipo explícito para las props de la página.
+// --- DATOS DE PRUEBA ---
+// En un proyecto real, esto estaría en otro archivo, ej: /lib/mock-data.ts
+const mockProjects: Project[] = [
+  { 
+    id: 1, 
+    title: 'Mi Primer Proyecto', 
+    slug: 'mi-primer-proyecto', 
+    description: 'Esta es la descripción de mi primer proyecto increíble.',
+    // ...otras propiedades de tu tipo Project
+  },
+  { 
+    id: 2, 
+    title: 'Otro Proyecto Genial', 
+    slug: 'otro-proyecto-genial', 
+    description: 'Este es aún mejor que el primero.',
+    // ...otras propiedades de tu tipo Project
+  },
+];
+// --- FIN DE DATOS DE PRUEBA ---
+
 type PageProps = {
-  params: {
-    slug: string;
-  };
+  params: { slug: string };
 };
 
-// Fetches all project slugs to pre-build pages at build time.
+// Ahora esta función lee los datos locales, no una API.
 export async function generateStaticParams() {
-  // TODO: Replace with your live API endpoint URL
-  const res = await fetch('http://127.0.0.1:8000/api/projects/');
-  
-  // Es una buena práctica manejar el caso en que el fetch falle durante la compilación.
-  if (!res.ok) {
-    return [];
-  }
-
-  const projects: Project[] = await res.json();
-
-  return projects.map((project) => ({
+  return mockProjects.map((project) => ({
     slug: project.slug,
   }));
 }
 
-// Fetches the data for a single project.
+// Esta función busca el proyecto en nuestro array local.
 async function getProject(slug: string): Promise<Project | null> {
-  // TODO: Replace with your live API endpoint URL
-  const res = await fetch(`http://127.0.0.1:8000/api/projects/${slug}/`);
-
-  if (!res.ok) {
-    return null;
-  }
-
-  return res.json();
+  // Usamos .find() para buscar en el array de prueba.
+  const project = mockProjects.find((p) => p.slug === slug);
+  return project || null;
 }
 
-// El componente de la página ahora usa el tipo 'PageProps' que definimos.
+// El resto de tu componente no cambia.
 export default async function ProjectDetailPage({ params }: PageProps) {
   const project = await getProject(params.slug);
 
