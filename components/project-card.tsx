@@ -6,7 +6,19 @@ import Link from 'next/link';
 import { ExternalLink, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Project } from '@/lib/projects-data';
+
+// ✅ Define el tipo 'Project' aquí.
+// Esta es la estructura que el componente espera recibir (en camelCase).
+interface Project {
+  id: string;
+  slug: string;
+  title: string;
+  shortDescription: string;
+  image: string;
+  technologies: string[];
+  demoUrl?: string | null; // Se usa '?' para indicar que puede no estar presente
+  githubUrl?: string | null;
+}
 
 interface ProjectCardProps {
   project: Project;
@@ -14,6 +26,7 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, index }: ProjectCardProps) {
+  // El resto del componente no necesita cambios.
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}

@@ -4,18 +4,20 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
+        protocol: 'http',
+        hostname: 'back.leonardotrejos.cerebria.co',
+        pathname: '/media/**',
+      },
+      {
         protocol: 'https',
-        hostname: 'via.placeholder.com',
-        port: '',
+        hostname: 'back.leonardotrejos.cerebria.co',
+        pathname: '/media/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
         pathname: '/**',
       },
-      // Agrega otros dominios que uses para imágenes
-      // {
-      //   protocol: 'https',
-      //   hostname: 'images.unsplash.com',
-      //   port: '',
-      //   pathname: '/**',
-      // },
     ],
   },
 };

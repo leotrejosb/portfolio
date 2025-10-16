@@ -7,13 +7,30 @@ import { ArrowLeft, ExternalLink, Github, Check, Code2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MatrixBackground } from '@/components/matrix-background';
-import { Project } from '@/lib/projects-data';
 
+// ✅ Define el tipo 'Project' aquí.
+// Esta es la estructura de datos que el componente espera recibir (en camelCase).
+interface Project {
+  id: string;
+  title: string;
+  shortDescription: string;
+  fullDescription: string;
+  image: string;
+  challenge: string;
+  solution: string;
+  results: string[];
+  technologies: string[];
+  demoUrl: string | null;
+  githubUrl: string | null;
+}
+
+// Las props del componente usan la interfaz que acabamos de definir.
 interface ProjectDetailClientProps {
   project: Project;
 }
 
 export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
+  // El resto del componente no necesita ningún cambio, ¡ya es dinámico!
   return (
     <main className="min-h-screen relative">
       <MatrixBackground />
