@@ -52,36 +52,49 @@ export default function ProjectsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // ✅ Efecto para cargar datos desde la API cuando el componente se monta
-  useEffect(() => {
-    async function fetchProjects() {
-      const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-      if (!apiBaseUrl) {
-        setError('La URL de la API no está configurada.');
-        setIsLoading(false);
-        return;
-      }
+// ✅ Efecto para cargar datos desde la API cuando el componente se monta
+useEffect(() => {
+  async function fetchProjects() {
+    setIsLoading(true);
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-      try {
-        const res = await fetch(`${apiBaseUrl}/projects/`);
-        if (!res.ok) {
-          throw new Error('No se pudieron cargar los proyectos.');
-        }
-        const data = await res.json();
-        const apiProjects: ApiProject[] = data.results || data;
-        
-        // Transforma cada proyecto y actualiza el estado
-        setProjects(apiProjects.map(mapApiToClient));
-
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Ocurrió un error inesperado.');
-      } finally {
-        setIsLoading(false);
-      }
+    if (!apiBaseUrl) {
+      setError('La URL de la API no está configurada.');
+      setIsLoading(false);
+      return;
     }
 
-    fetchProjects();
-  }, []); // El array vacío asegura que se ejecute solo una vez
+    try {
+      // Usamos el mismo patrón que tu otro proyecto.
+      // Si tu .env es ".../api/v1", esta ruta es la correcta.
+      const res = await fetch(`${apiBaseUrl}/projects/`);
+      
+      if (!res.ok) {
+        // Lanzamos un error más detallado para facilitar la depuración
+        throw new Error(`Error ${res.status}: No se pudieron cargar los proyectos.`);
+      }
+
+      const data = await res.json();
+      
+      // ✅ Usamos la lógica MÁS SEGURA de tu otro proyecto para manejar la respuesta
+      const apiProjects: ApiProject[] = Array.isArray(data?.results) 
+        ? data.results 
+        : Array.isArray(data) 
+        ? data 
+        : [];
+      
+      // Transforma cada proyecto y actualiza el estado
+      setProjects(apiProjects.map(mapApiToClient));
+
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Ocurrió un error inesperado.');
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  fetchProjects();
+}, []); // El array vacío asegura que se ejecute solo una vez
 
   return (
     <main className="min-h-screen relative">
