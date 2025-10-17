@@ -70,42 +70,41 @@ export default function ContactPage() {
   };
 
 
-  // 👇 PASO 2: CREAR LA FUNCIÓN PARA MANEJAR LA DESCARGA DEL CV
-  const handleDownloadCV = async () => {
-    setIsDownloading(true);
-    try {
-      // Llamamos al nuevo endpoint seguro que creaste en Django
-      const response = await fetch('https://back.leonardotrejos.cerebria.co/api/v1/contact/download-cv/');
+  // In your ContactPage.tsx file
 
-      if (!response.ok) {
-        throw new Error('CV download failed. Please try again.');
-      }
+const handleDownloadCV = async () => {
+  setIsDownloading(true);
+  setSubmitError(''); // Clear previous errors
 
-      // El backend devuelve el archivo como un "blob" (Binary Large Object)
-      const blob = await response.blob();
-      // Creamos una URL temporal en el navegador para este blob
-      const url = window.URL.createObjectURL(blob);
-      // Creamos un enlace <a> invisible en el DOM
-      const a = document.createElement('a');
-      a.style.display = 'none';
-      a.href = url;
-      // Sugerimos un nombre para el archivo descargado
-      a.download = 'Leonardo_Trejos_CV.pdf';
-      document.body.appendChild(a);
-      // Hacemos clic en el enlace para iniciar la descarga
-      a.click();
-      // Limpiamos eliminando la URL y el enlace
-      window.URL.revokeObjectURL(url);
-      a.remove();
+  try {
+    // 👇 THE ONLY CHANGE IS HERE: Correctly point to the download action 👇
+    const response = await fetch('https://back.leonardotrejos.cerebria.co/api/v1/documents/download-latest/');
 
-    } catch (error) {
-      console.error('Download CV Error:', error);
-      // Opcional: mostrar un error de descarga al usuario
-      setSubmitError((error as Error).message || 'Could not download the CV.');
-    } finally {
-      setIsDownloading(false);
+    if (!response.ok) {
+      // This will now catch proper errors, like if no CV is uploaded
+      const errorData = await response.json();
+      throw new Error(errorData.error || `Error ${response.status}: Download failed`);
     }
-  };
+
+    // This part is correct and will now work as expected
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;
+    a.download = 'Leonardo_Trejos_CV.pdf';
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    a.remove();
+
+  } catch (error) {
+    console.error('Download CV Error:', error);
+    setSubmitError((error as Error).message);
+  } finally {
+    setIsDownloading(false);
+  }
+};
 
 
   return (
