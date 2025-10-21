@@ -4,7 +4,13 @@ import { useEffect } from 'react';
 
 declare global {
   interface Window {
-    chatwootSettings?: Record<string, any>;
+    chatwootSettings?: {
+      position?: 'left' | 'right';
+      type?: 'standard' | 'expanded_bubble';
+      launcherTitle?: string;
+      hideMessageBubble?: boolean;
+      showPopoutButton?: boolean;
+    };
     chatwootSDK?: {
       run: (options: { websiteToken: string; baseUrl: string }) => void;
     };
@@ -30,8 +36,7 @@ export default function ChatwootWidget() {
     document.body.appendChild(g);
 
     g.onload = () => {
-      // Asegura que chatwootSDK esté disponible antes de usarlo
-      const tryInit = () => {
+      const tryInit = (): void => {
         if (window.chatwootSDK) {
           window.chatwootSDK.run({
             websiteToken: 'Jv4XV7KNnB3JfSsivoj7CKeY',
@@ -40,12 +45,14 @@ export default function ChatwootWidget() {
 
           // Forzar visibilidad después de iniciar
           setTimeout(() => {
-            const elements = [
-              document.querySelector('.woot-widget-holder'),
-              document.querySelector('.woot-widget-bubble'),
-              document.querySelector('.woot--bubble-holder'),
+            const selectors = [
+              '.woot-widget-holder',
+              '.woot-widget-bubble',
+              '.woot--bubble-holder',
             ];
-            elements.forEach((el) => {
+
+            selectors.forEach((selector) => {
+              const el = document.querySelector(selector);
               if (el instanceof HTMLElement) {
                 el.classList.remove('woot--hide');
                 el.style.display = 'flex';
@@ -55,7 +62,6 @@ export default function ChatwootWidget() {
             });
           }, 800);
         } else {
-          // Reintentar si todavía no cargó completamente
           setTimeout(tryInit, 500);
         }
       };
