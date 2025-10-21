@@ -3,19 +3,35 @@
 import Script from 'next/script';
 import { useEffect, useState } from 'react';
 
+// Declaración de tipos para window
+declare global {
+  interface Window {
+    chatwootSettings?: {
+      position: string;
+      type: string;
+      launcherTitle: string;
+      hideMessageBubble: boolean;
+    };
+    chatwootSDK?: {
+      run: (config: { websiteToken: string; baseUrl: string }) => void;
+    };
+    $chatwoot?: unknown;
+  }
+}
+
 export default function ChatwootWidget() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     // Configuración de Chatwoot
-    (window as any).chatwootSettings = {
+    window.chatwootSettings = {
       position: "right",
       type: "standard",
       launcherTitle: "Chatea con nosotros",
       hideMessageBubble: false,
     };
 
-    console.log('Chatwoot settings configurados:', (window as any).chatwootSettings);
+    console.log('Chatwoot settings configurados:', window.chatwootSettings);
   }, []);
 
   const handleLoad = () => {
@@ -23,9 +39,9 @@ export default function ChatwootWidget() {
     
     const BASE_URL = "https://zzchatwootzz.cerebria.co";
     
-    if ((window as any).chatwootSDK) {
+    if (window.chatwootSDK) {
       console.log('chatwootSDK detectado, inicializando...');
-      (window as any).chatwootSDK.run({
+      window.chatwootSDK.run({
         websiteToken: "Jv4XV7KNnB3JfSsivoj7CKeY",
         baseUrl: BASE_URL
       });
@@ -36,7 +52,7 @@ export default function ChatwootWidget() {
     }
   };
 
-  const handleError = (error: any) => {
+  const handleError = (error: Error) => {
     console.error('Error cargando Chatwoot SDK:', error);
   };
 
