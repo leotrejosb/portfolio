@@ -120,20 +120,3 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* 7. Estilos para Chatwoot Widget - Asegurar visibilidad */
-.woot-widget-holder {
-  display: block !important;
-}
-
-#cw-widget-holder {
-  display: block !important;
-}
-
-#cw-widget-holder iframe {
-  visibility: visible !important;
-}
-
-/* Opcional: Personalizar la posición y z-index del widget si es necesario */
-.woot-widget-holder {
-  z-index: 9999;
-}
