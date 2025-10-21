@@ -1,48 +1,71 @@
 'use client';
 
 import Script from 'next/script';
+import { useEffect, useState } from 'react';
 
 export default function ChatwootWidget() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Configuración de Chatwoot
+    (window as any).chatwootSettings = {
+      position: "right",
+      type: "standard",
+      launcherTitle: "Chatea con nosotros",
+      hideMessageBubble: false,
+    };
+
+    console.log('Chatwoot settings configurados:', (window as any).chatwootSettings);
+  }, []);
+
+  const handleLoad = () => {
+    console.log('Script de Chatwoot cargado');
+    
+    const BASE_URL = "https://zzchatwootzz.cerebria.co";
+    
+    if ((window as any).chatwootSDK) {
+      console.log('chatwootSDK detectado, inicializando...');
+      (window as any).chatwootSDK.run({
+        websiteToken: "Jv4XV7KNnB3JfSsivoj7CKeY",
+        baseUrl: BASE_URL
+      });
+      setIsLoaded(true);
+      console.log('Chatwoot inicializado correctamente');
+    } else {
+      console.error('chatwootSDK no está disponible después de cargar el script');
+    }
+  };
+
+  const handleError = (error: any) => {
+    console.error('Error cargando Chatwoot SDK:', error);
+  };
+
   return (
     <>
       <Script
-        id="chatwoot-settings"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.chatwootSettings = {
-              position: "right",
-              type: "standard",
-              launcherTitle: "Chatea con nosotros"
-            };
-          `,
-        }}
+        id="chatwoot-sdk"
+        src="https://zzchatwootzz.cerebria.co/packs/js/sdk.js"
+        strategy="lazyOnload"
+        onLoad={handleLoad}
+        onError={handleError}
       />
-      <Script
-        id="chatwoot-widget"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            (function(d, t) {
-              var BASE_URL = "https://zzchatwootzz.cerebria.co";
-              var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
-              g.src = BASE_URL + "/packs/js/sdk.js";
-              g.async = true;
-              s.parentNode.insertBefore(g, s);
-              g.onload = function() {
-                if (window.chatwootSDK) {
-                  window.chatwootSDK.run({
-                    websiteToken: "Jv4XV7KNnB3JfSsivoj7CKeY",
-                    baseUrl: BASE_URL
-                  });
-                } else {
-                  console.error("Chatwoot SDK no se cargó correctamente.");
-                }
-              };
-            })(document, "script");
-          `,
-        }}
-      />
+      
+      {/* Indicador visual temporal para debugging */}
+      {process.env.NODE_ENV === 'development' && (
+        <div style={{
+          position: 'fixed',
+          bottom: '10px',
+          left: '10px',
+          background: isLoaded ? 'green' : 'red',
+          color: 'white',
+          padding: '5px 10px',
+          borderRadius: '5px',
+          fontSize: '12px',
+          zIndex: 999999
+        }}>
+          Chatwoot: {isLoaded ? '✓ Cargado' : '✗ No cargado'}
+        </div>
+      )}
     </>
   );
 }
