@@ -1,11 +1,12 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google'; // Importa la fuente Inter
+import { Inter } from 'next/font/google';
+import ChatwootWidget from '@/components/ChatwootWidget';
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800', '900'], // ✅ Asegúrate de cargar todos los pesos que usarás
-  variable: '--font-sans', // Asigna a la variable CSS
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-sans',
 });
 
 export const metadata: Metadata = {
@@ -26,9 +27,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    // ✅ Aplica la clase 'dark' y la variable de la fuente Inter
-    <html lang="es" className="dark ${inter.variable}"> 
-      <body>{children}</body>
+    <html lang="es" className={`dark ${inter.variable}`}> 
+      <body>
+        {children}
+        <ChatwootWidget />
+      </body>
     </html>
   );
 }

@@ -29,7 +29,7 @@
   --color-accent: hsl(var(--accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
   --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground)); /* Añadido para consistencia */
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
@@ -118,4 +118,22 @@
   background: rgba(26, 26, 26, 0.4);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 7. Estilos para Chatwoot Widget - Asegurar visibilidad */
+.woot-widget-holder {
+  display: block !important;
+}
+
+#cw-widget-holder {
+  display: block !important;
+}
+
+#cw-widget-holder iframe {
+  visibility: visible !important;
+}
+
+/* Opcional: Personalizar la posición y z-index del widget si es necesario */
+.woot-widget-holder {
+  z-index: 9999;
 }
