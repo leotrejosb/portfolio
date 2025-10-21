@@ -120,25 +120,9 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Chatwoot - Siempre visible */
-#cw-widget-holder,
-.woot-widget-holder {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: fixed !important;
+/* Chatwoot - Solo personalización de posición */
+.woot-widget-bubble {
   bottom: 20px !important;
   right: 20px !important;
   z-index: 999999 !important;
-}
-
-#cw-widget-holder iframe,
-.woot-widget-holder iframe {
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: all !important;
-}
-
-html, body {
-  overflow: visible !important;
 }
